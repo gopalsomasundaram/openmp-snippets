@@ -2,11 +2,14 @@
 #include <chrono>
 using namespace std;
 using namespace std::chrono;
-static long num_steps = 100000;
+static long num_steps = 1000000;
 int main()
 {
     auto start = high_resolution_clock::now();
-    int i,x,total,constant,sum=0;
+    int i,x,constant;
+    long long int sum=0;
+    long long int total;
+
     constant = 12;
     for(i=0;i<num_steps;i++){
         x = i + constant;

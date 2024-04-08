@@ -4,10 +4,12 @@
 using namespace std;
 using namespace std::chrono;
 
-static long num_steps = 100000;
+static long num_steps = 1000000;
 int main(){
     auto start = high_resolution_clock::now();
-    int i,x,total,nthreads,constant,sum[4];
+    int i,x,nthreads,constant;
+    long long int total;
+    long long int sum[4];
     constant = 12;
     omp_set_num_threads(4);
     #pragma omp parallel
