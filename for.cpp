@@ -4,26 +4,23 @@
 using namespace std;
 using namespace std::chrono;
 
-static long num_steps = 1000;
+static long num_steps = 100000;
 int main(){
     auto start = high_resolution_clock::now();
-    int i,x,total,nthreads,constant;
+    int i,x,total,constant;
     constant = 12;
     omp_set_num_threads(4);
     #pragma omp parallel
     {
-        int i,uniqueID,x,nthrds,sum;
+        int i,uniqueID,x,sum;
         uniqueID = omp_get_thread_num();
-        nthrds = omp_get_num_threads();
-        if(uniqueID==0)
-            nthreads = nthrds;
-        for(i=uniqueID;i<num_steps;i=i+nthrds)
+        #pragma omp for
+        for(i=uniqueID;i<num_steps;i++)
         {
             x = i + constant;
             sum += x;
         }
-        #pragma omp critical
-        //cout<<uniqueID;
+        #pragma omp atomic
         total += sum * constant;
     }
 
